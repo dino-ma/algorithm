@@ -81,6 +81,30 @@ function deleteItem(int $index, array $array) : array
 echo '删除指定元素'.PHP_EOL;
 print_r(deleteItem(1, $array));
 
+
+
+function b2TreeFind(string $find, array $array) {
+
+    if (empty($array)) {
+        return $array;
+    }
+    $size = count($array);
+    sort($array);
+    $start = 0;
+    while ($start <= $size) {
+        $pos = floor(($start+$size)/2);
+        if ($array[$pos] == $find) {
+            return $pos;
+        }elseif ($array[$pos] < $find) {
+            $start = $pos + 1;
+        } else {
+            $size = $pos - 1;
+        }
+    }
+}
+echo '二分查找'.PHP_EOL;
+print_r(b2TreeFind(5, $array));
+
 //数组的优势和劣势
 //数组拥有非常高效的随机访问能力 例如二分查找就利用了数组的这种优势
 //数组的劣势

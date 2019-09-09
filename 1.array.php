@@ -80,3 +80,10 @@ function deleteItem(int $index, array $array) : array
 }
 echo '删除指定元素'.PHP_EOL;
 print_r(deleteItem(1, $array));
+
+//数组的优势和劣势
+//数组拥有非常高效的随机访问能力 例如二分查找就利用了数组的这种优势
+//数组的劣势
+//数组的元素连续紧密存储在内存中，插入删除会导致大量的元素被迫移动影响效率
+
+//适合读操作多，写操作少的场景。

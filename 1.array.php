@@ -83,7 +83,8 @@ print_r(deleteItem(1, $array));
 
 
 
-function b2TreeFind(string $find, array $array) {
+function b2TreeFind(string $find, array $array)
+{
 
     if (empty($array)) {
         return $array;

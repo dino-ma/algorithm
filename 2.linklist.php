@@ -6,7 +6,8 @@
  */
 
 //创建一个链表
-class LinkList{
+class LinkList
+{
     public $data;
     public $next;
 }

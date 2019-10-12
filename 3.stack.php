@@ -30,6 +30,9 @@ class Stack
             $this->error = 'not repeat set maxSize';
             return false;
         }
+
+        $this->maxSize = $maxSize;
+        return true;
     }
 
     public function push(string $item) : bool
@@ -69,6 +72,7 @@ class Stack
 }
 
 $stockObj = new Stack();
+$stockObj->setMaxSize(10);
 for ($i = 0; $i <= 5; $i++) {
     $stockObj->push((string)$i);
 }

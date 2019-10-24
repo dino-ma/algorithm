@@ -101,3 +101,115 @@ $father2->addChildRen($childRen21, $childRen22);
 $root->addChildRen($father1, $father2);
 $tree->printTree($tree->root);
 
+
+//二叉搜索树 Binary Sort Tree
+class BinarySortTree{
+
+    public $data;
+
+    public $left;
+
+    public $right;
+
+
+    public function __construct()
+    {
+
+    }
+
+
+    public function setData(int $data) : BinarySortTree
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+
+    /**
+     * 构造一个二叉树
+     * @param int $data
+     * @param BinarySortTree $tree
+     * @return BinarySortTree
+     */
+    public function insert(int $data, BinarySortTree $tree)
+    {
+
+        if (is_null($tree->data)) {
+            $tree->data = $data;
+            return $tree;
+        }
+
+        $node = $tree;
+
+        while ($node) {
+            if ($node->data < $data) {
+                if ($node->left) {
+                    $node = $node->left;
+                } else {
+                    $nodeObj = new BinarySortTree();
+                    $nodeObj->data = $data;
+
+                    $node->left = $nodeObj;
+                    $node = $node->left;
+
+                    break;
+                }
+            }elseif ($node->data > $data) {
+                if ($node->right) {
+                    $node = $node->right;
+                } else {
+
+                    $nodeObj = new BinarySortTree();
+                    $nodeObj->data = $data;
+
+                    $node->right = $nodeObj;
+                    $node = $node->right;
+
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+
+        return $node;
+    }
+
+
+    /**
+     * 二叉树前序遍历
+     * @param BinarySortTree $tree
+     * @return array
+     */
+    public function preOrderTraversal(BinarySortTree $tree) : array
+    {
+        if (is_null($tree)) {
+            return [];
+        }
+        $traversal = [];
+//        array_push($tr)
+    }
+}
+
+//构造一个二叉搜索树
+$node = new BinarySortTree();
+$root = $node->insert(10, $node);
+$node->insert(11, $root);
+$node->insert(9, $root);
+$node->insert(8, $root);
+$node->insert(7, $root);
+$node->insert(11, $root);
+$node->insert(12, $root);
+$node->insert(13, $root);
+
+//AVL平衡树、红黑树、树堆等
+
+//遍历
+//深度优先： 前序、中序、后序
+//广度优先：层序
+
+
+print_r($root);
+
+
+//前序遍历

@@ -197,12 +197,13 @@ class BinarySortTree
 
     /**
      * 二叉树前序遍历
+     * 根节点->左子树->右子树
      * @param BinarySortTree $tree
      * @return array
      */
     public function preOrderTraversal(BinarySortTree $tree) : array
     {
-        if (is_null($tree->data)) {
+        if (is_null($tree)) {
             return [];
         }
         $traversal = $data = [];
@@ -212,23 +213,65 @@ class BinarySortTree
             $item = array_pop($traversal);
             $data[] = $item->data;
 
-            if ($item->right != null) {
+            if (!is_null($item->right)) {
                 array_push($traversal, $item->right);
             }
-            if ($item->left != null) {
+            if (!is_null($item->left)) {
                 array_push($traversal, $item->left);
             }
         }
 
         return $data;
     }
+
+
+    /**
+     * 中序遍历
+     * 左子树->根节点->右子树
+     * @param BinarySortTree $tree
+     * @return array
+     */
+    public function sequentialTraversal(BinarySortTree $tree) : array
+    {
+        $stack = array();
+        $current_node = $tree;
+        while (!empty($stack) || $current_node != null) {
+            while ($current_node != null) {
+                array_push($stack, $current_node);
+                $current_node = $current_node->left;
+            }
+            $current_node = array_pop($stack);
+            echo $current_node->data . " ";
+            $current_node = $current_node->right;
+        }
+
+        return [];
+    }
+
+
+    /**
+     * 后序遍历
+     * 左子树->右子树->跟节点
+     * @param BinarySortTree $tree
+     * @return array
+     */
+    public function postOrderTraversal(BinarySortTree $tree) : array
+    {
+
+    }
+
+
+
+
 }
 
 //构造一个二叉搜索树
 $node = new BinarySortTree();
 $root = $node->insert(500, $node);
 $node->insert(499, $root);
-//$node->insert(495, $root);
+$node->insert(496, $root);
+$node->insert(495, $root);
+
 $node->insert(501, $root);
 $node->insert(498, $root);
 $node->insert(497, $root);
@@ -250,4 +293,8 @@ print_r($max);
 
 //前序遍历
 $traversal = $node->preOrderTraversal($root);
-print_r($traversal);
+print_r($traversal);//500 499 496 495 498 497 501 503 502 505
+
+//中序遍历
+$traversal = $node->sequentialTraversal($root);
+print_r($traversal);//497 495 496 498 499 500 501 503 502 505

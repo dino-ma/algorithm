@@ -103,7 +103,8 @@ $tree->printTree($tree->root);
 
 
 //二叉搜索树 Binary Sort Tree
-class BinarySortTree{
+class BinarySortTree
+{
 
     public $data;
 
@@ -114,7 +115,6 @@ class BinarySortTree{
 
     public function __construct()
     {
-
     }
 
 
@@ -142,7 +142,7 @@ class BinarySortTree{
         $node = $tree;
 
         while ($node) {
-            if ($node->data < $data) {
+            if ($node->data > $data) {
                 if ($node->left) {
                     $node = $node->left;
                 } else {
@@ -154,11 +154,10 @@ class BinarySortTree{
 
                     break;
                 }
-            }elseif ($node->data > $data) {
+            } elseif ($node->data < $data) {
                 if ($node->right) {
                     $node = $node->right;
                 } else {
-
                     $nodeObj = new BinarySortTree();
                     $nodeObj->data = $data;
 
@@ -176,6 +175,26 @@ class BinarySortTree{
     }
 
 
+
+    public function min(BinarySortTree $tree) : BinarySortTree
+    {
+        while ($tree->left) {
+            $tree = $tree->left;
+        }
+
+        return $tree;
+    }
+
+    public function max(BinarySortTree $tree) : BinarySortTree
+    {
+        while ($tree->right) {
+            $tree = $tree->right;
+        }
+
+        return $tree;
+    }
+
+
     /**
      * 二叉树前序遍历
      * @param BinarySortTree $tree
@@ -183,25 +202,45 @@ class BinarySortTree{
      */
     public function preOrderTraversal(BinarySortTree $tree) : array
     {
-        if (is_null($tree)) {
+        if (is_null($tree->data)) {
             return [];
         }
-        $traversal = [];
-//        array_push($tr)
+        $traversal = $data = [];
+        array_push($traversal, $tree);
+
+        while (!empty($traversal)) {
+            $item = array_pop($traversal);
+            $data[] = $item->data;
+
+            if ($item->right != null) {
+                array_push($traversal, $item->right);
+            }
+            if ($item->left != null) {
+                array_push($traversal, $item->left);
+            }
+        }
+
+        return $data;
     }
 }
 
 //构造一个二叉搜索树
 $node = new BinarySortTree();
-$root = $node->insert(10, $node);
-$node->insert(11, $root);
-$node->insert(9, $root);
-$node->insert(8, $root);
-$node->insert(7, $root);
-$node->insert(11, $root);
-$node->insert(12, $root);
-$node->insert(13, $root);
+$root = $node->insert(500, $node);
+$node->insert(499, $root);
+//$node->insert(495, $root);
+$node->insert(501, $root);
+$node->insert(498, $root);
+$node->insert(497, $root);
+$node->insert(503, $root);
+$node->insert(502, $root);
+$node->insert(505, $root);
+print_r($root);
 
+$min = $node->min($root);
+print_r($min);
+$max = $node->max($root);
+print_r($max);
 //AVL平衡树、红黑树、树堆等
 
 //遍历
@@ -209,7 +248,6 @@ $node->insert(13, $root);
 //广度优先：层序
 
 
-print_r($root);
-
-
 //前序遍历
+$traversal = $node->preOrderTraversal($root);
+print_r($traversal);

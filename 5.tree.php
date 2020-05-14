@@ -7,7 +7,13 @@
 // | Author: dino.ma <dino_ma@163.com>
 // +----------------------------------------------------------------------------
 declare(strict_types=1);
+$path = '"http://cdn.shopify.com/s/files/1/0282/5850/products/apparel_tops_undefeated_hooded-color-block-jacket_40027.view_1.color_midnight-black_2048x2048.jpg?v=1571856328';
 
+$coverPathInfo = pathinfo(parse_url($path)['path']);
+$cover = date('y/m/d/h/i/s/').md5($path).'.'.$coverPathInfo['extension'];
+
+var_dump($cover);
+exit;
 class BinaryNode
 {
     private $left;
@@ -233,25 +239,22 @@ class BinarySortTree
      */
     public function sequentialTraversal(BinarySortTree $tree) : array
     {
-        $stack = array();
-        $current_node = $tree;
-        while (!empty($stack) || $current_node != null) {
-            while ($current_node != null) {
-                array_push($stack, $current_node);
-                $current_node = $current_node->left;
-            }
-            $current_node = array_pop($stack);
-            echo $current_node->data . " ";
-            $current_node = $current_node->right;
+        if (is_null($tree)) {
+            return [];
         }
 
-        return [];
+        $stack = new SplStack();
+        $stack->push([0, $tree]);
+
+        while ($stack) {
+
+        }
     }
 
 
     /**
      * 后序遍历
-     * 左子树->右子树->跟节点
+     * 左子树->右子树->根节点
      * @param BinarySortTree $tree
      * @return array
      */

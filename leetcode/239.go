@@ -11,12 +11,11 @@ func maxSlidingWindow(nums []int, k int) []int {
 	queue := make([]int, 0, length);
 	for i :=0; i<length ;i++  {
 		//队列不为空并且当前的值大于队列最左侧的值则只保留队列最末尾的值
-		if len(queue) !=0 && nums[i] >= nums[queue[len(queue)-1]] {
+		for len(queue) !=0 && nums[i]  >= nums[queue[len(queue)-1]] {
 			queue = queue[:len(queue)-1]
 		}
 		//队列从头入
 		queue = append(queue, i);
-		fmt.Println(queue)
 
 		//窗口滑动
 		if queue[0] == i - k {

@@ -26,7 +26,6 @@ func threeSum(nums []int) [][]int {
 		} // i 去重
 
 		fmt.Println(l, r)
-
 		//l和r永远不相交
 		for l < r {
 			//去掉左侧有重复的值

@@ -22,6 +22,8 @@ func isAnagram(s string, t string) bool  {
 	return sArray == tArray;
 }
 
+//valid-anagram
+
 func main()  {
 	var s = "anagram";
 	var t ="nagaram";

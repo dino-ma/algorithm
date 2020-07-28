@@ -2,46 +2,52 @@ package main
 
 import "fmt"
 
-func Max(a,b int) int {
-	if a>b {
+func max(a,b int) int {
+	if a > b {
 		return a
 	}
 
 	return b
 }
 
-func Min(a,b int) int {
-	if a< b {
+func min(a,b int) int {
+	if a < b {
 		return a
 	}
 
 	return b
 }
+
 
 func maxArea(height []int) int {
 	length := len(height)
 	maxArea := 0
-	if length == 0{
+	if length < 2{
 		return maxArea
 	}
-	l := 0
-	r := length - 1
-	for l < r {
-		left , right := height[l], height[r]
-		area := (r-l) * Min(left, right)
+	left , right := 0, length - 1
 
-		maxArea = Max(area, maxArea)
-		if left > right {
-			r--
-		}else{
-			l++
+	for left < right {
+		area := min(height[left], height[right]) * (right-left)
+		maxArea = max(maxArea, area)
+		if height[right] > height[left] {
+			left++
+		} else {
+			right--
 		}
-
 	}
 
 	return maxArea
-
 }
+
+
+//给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+//
+//说明：你不能倾斜容器，且 n 的值至少为 2。
+//
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/container-with-most-water
+//著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func main()  {
 	maxArea :=maxArea([]int{1,8,6,2,5,4,8,3,7})

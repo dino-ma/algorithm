@@ -5,23 +5,22 @@ import (
 )
 
 func twoSum(nums []int, target int) []int {
-	numsLength := len(nums);
-	if numsLength < 1 {
-		return nil;
+	length := len(nums)
+	if length < 2{
+		return nil
 	}
-	hashMap := make(map[int]int);
-	for numsKey, numsVal := range nums {
 
-		hashMapVal, ok := hashMap[target - numsVal];
+	hashMap := make(map[int]int)
+	for key,val := range nums {
+
+		hashMapVal , ok := hashMap[target - val]
 		if ok {
-			return []int{numsKey, hashMapVal};
-
+			return []int{hashMapVal, key}
 		}
-
-		hashMap[numsVal] = numsKey;
+		hashMap[val] = key
 	}
 
-	return nil;
+	return nil
 }
 
 func main() {

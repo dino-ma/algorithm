@@ -35,13 +35,13 @@ func makeListNode(nums []int) *ListNode {
  * }
  */
 func swapPairs(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
+	if head ==nil || head.Next == nil || head.Next.Next == nil {
 		return head
 	}
 
-	h := &ListNode{Val:0, Next:head}
+	h := &ListNode{Next:head}
 	p := h
-	for p!=nil && p.Next !=nil && p.Next.Next != nil{
+	for p!=nil && p.Next != nil && p.Next.Next !=nil  {
 		a := p.Next
 		b := a.Next
 		p.Next = b
@@ -51,6 +51,7 @@ func swapPairs(head *ListNode) *ListNode {
 	}
 
 	return h.Next
+
 }
 
 func main()  {
@@ -60,8 +61,8 @@ func main()  {
 	//	fmt.Println(a.Val)
 	//	a = a.Next
 	//}
+	result := swapPairs(a)
 
-	result := swapPairs(a                                                                                                                                                                                                                                                               )
 	for result != nil {
 		fmt.Println(result.Val)
 		result = result.Next

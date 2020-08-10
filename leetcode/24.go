@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ListNode struct{
 	Next *ListNode
@@ -35,23 +37,21 @@ func makeListNode(nums []int) *ListNode {
  * }
  */
 func swapPairs(head *ListNode) *ListNode {
-	if head ==nil || head.Next == nil || head.Next.Next == nil {
+	if head == nil || head.Next == nil || head.Next == nil {
 		return head
 	}
-
-	h := &ListNode{Next:head}
-	p := h
-	for p!=nil && p.Next != nil && p.Next.Next !=nil  {
+	p := &ListNode{Next:head}
+	h := p
+	for p !=nil && p.Next != nil && p.Next.Next !=nil{
 		a := p.Next
 		b := a.Next
-		p.Next = b
 		a.Next = b.Next
+		p.Next = b
 		b.Next = a
 		p = a
 	}
 
 	return h.Next
-
 }
 
 func main()  {
@@ -67,4 +67,5 @@ func main()  {
 		fmt.Println(result.Val)
 		result = result.Next
 	}
+
 }
